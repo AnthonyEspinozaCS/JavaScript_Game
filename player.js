@@ -80,7 +80,8 @@ export class Player {
                     else this.game.time = 0;
                 } else {
                     this.setState(6, 0);
-                    this.game.lives -= 5;
+                    this.game.lives -= 1;
+                    this.game.score -= 5;
                     if(this.game.lives <= 0) this.game.gameOver = true;
                 }
             }
