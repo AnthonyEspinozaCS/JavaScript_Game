@@ -33,15 +33,15 @@ window.addEventListener('load', function(){
             this.score = 0;
             this.winningScore = 50;
             this.fontColor = 'white';
-            this.time = 20;
+            this.time = 20000;
             this.minTime = 0;
             this.player.currentState = this.player.states[0];
             this.player.currentState.enter();
             this.gameOver = false;
             }
         update(deltaTime){
-            this.time += deltaTime;
-            if (this.time > this.maxTime) this.gameOver = true;
+            this.time -= deltaTime;
+            if (this.time < this.minTime) this.gameOver = true;
             this.background.update();
             this.player.update(this.input.keys, deltaTime);
             // handle enemies

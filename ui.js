@@ -29,14 +29,15 @@ export class UI {
             context.font = this.fontSize * 3 + 'px ' + this.fontFamily;
             context.fillStyle = 'white';
             context.shadowColor = 'black';
-            if(this.game.score > this.game.winningScore){
+            if(this.game.score > 10){
                 context.fillText('Boo-yah', this.game.width * 0.5, this.game.height * 0.5 - 20);
                 context.font = this.fontSize * 1.5 + 'px ' + this.fontFamily;
                 context.fillText('Well played!', this.game.width * 0.5, this.game.height * 0.5 + 40);
             } else {
-            context.fillText('Rekt Nerd', this.game.width * 0.5, this.game.height * 0.5 - 20);
-            context.font = this.fontSize * 1.5 + 'px ' + this.fontFamily;
-            context.fillText('Better luck next time!', this.game.width * 0.5, this.game.height * 0.5 + 20);
+                context.font = this.fontSize * 2 + 'px ' + this.fontFamily;
+                context.fillText('The forest has bested you!', this.game.width * 0.5, this.game.height * 0.5 - 20);
+                context.font = this.fontSize * 1.5 + 'px ' + this.fontFamily;
+                context.fillText('Better luck next time!', this.game.width * 0.5, this.game.height * 0.5 + 20);
             }
         }
         context.restore();
