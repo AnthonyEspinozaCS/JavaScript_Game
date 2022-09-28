@@ -76,8 +76,8 @@ export class Player {
                 if(this.currentState === this.states[4] || this.currentState === this.states[5]){
                     this.game.score++;
                     this.game.floatingMessages.push(new FloatingMessage('+1', enemy.x - enemy.width/3 * 0.5, enemy.y + enemy.height/3 * 0.5, 0, 0));
-                    if(this.game.time - 1000 >= 0) this.game.time -= 1000;
-                    else this.game.time = 0;
+                    if(this.game.time + 1000 <= 20000) this.game.time += 1000;
+                    else this.game.time = 20;
                 } else {
                     this.setState(6, 0);
                     this.game.lives -= 1;

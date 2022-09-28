@@ -33,8 +33,8 @@ window.addEventListener('load', function(){
             this.score = 0;
             this.winningScore = 50;
             this.fontColor = 'white';
-            this.time = 0;
-            this.maxTime = 20000;
+            this.time = 20;
+            this.minTime = 0;
             this.player.currentState = this.player.states[0];
             this.player.currentState.enter();
             this.gameOver = false;
