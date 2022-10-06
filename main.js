@@ -1,5 +1,6 @@
 import { Background } from './background.js';
 import { ClimbingEnemy, FlyingEnemy, GroundEnemy } from './enemies.js';
+import { inGame, pausedGame, startMenu } from './gameStates.js';
 import { InputHandler } from './input.js';
 import { Player } from './player.js'
 import { UI } from './ui.js'
@@ -35,13 +36,16 @@ window.addEventListener('load', function(){
             this.fontColor = 'white';
             this.time = 20000;
             this.minTime = 0;
+            this.gameState = [new startMenu(this), new inGame(this), new pausedGame(this)];
+            this.currentGameState = this.gameState[0];
             this.player.currentState = this.player.states[0];
             this.player.currentState.enter();
             this.gameOver = false;
             }
         update(deltaTime){
-            this.time -= deltaTime;
+            if(this.currentGameState !== this.gameState[0]) this.time -= deltaTime;
             if (this.time < this.minTime) this.gameOver = true;
+            this.currentGameState.handleInput(this.input.keys);
             this.background.update();
             this.player.update(this.input.keys, deltaTime);
             // handle enemies
@@ -77,26 +81,32 @@ window.addEventListener('load', function(){
         }
         draw(context){
             this.background.draw(context);
-            this.player.draw(context);
-            this.enemies.forEach(enemy => {
-                enemy.draw(context);
-            });
-            this.particles.forEach(particle => {
-                particle.draw(context);
-            });
-            
-            this.collisions.forEach(collision => {
-                collision.draw(context);
-            });
-            this.floatingMessages.forEach(message => {
-                message.draw(context);
-            });
+            if(this.currentGameState === this.gameState[1]){
+                this.player.draw(context);
+                this.enemies.forEach(enemy => {
+                    enemy.draw(context);
+                });
+                this.particles.forEach(particle => {
+                    particle.draw(context);
+                });
+                
+                this.collisions.forEach(collision => {
+                    collision.draw(context);
+                });
+                this.floatingMessages.forEach(message => {
+                    message.draw(context);
+                });
+            }
             this.UI.draw(context);
         }
         addEnemy(){
             if(this.speed > 0 && Math.random() < 0.5) this.enemies.push(new GroundEnemy(this));
             else if(this.speed > 0) this.enemies.push(new ClimbingEnemy(this));
             this.enemies.push(new FlyingEnemy(this));
+        }
+        setGameState(state){
+            this.currentGameState = this.gameState[state];
+            this.currentGameState.enter();
         }
     }
 

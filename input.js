@@ -3,9 +3,10 @@ export class InputHandler{
         this.game = game
         this.keys = [];
         window.addEventListener('keydown', e => {
+            console.log(e.key);
             if((e.key === 'ArrowDown' || e.key === 'ArrowUp'
             || e.key === 'ArrowLeft' || e.key === 'ArrowRight' 
-            || e.key === 'Enter') 
+            || e.key === 'Enter' || e.key === ' ' || e.key === 'p' || e.key === 'Escape') 
             && this.keys.indexOf(e.key) === -1){
                 this.keys.push(e.key);
             } else if(e.key === 'd') this.game.debug = !this.game.debug;
@@ -13,7 +14,7 @@ export class InputHandler{
         window.addEventListener('keyup', e => {
             if(e.key === 'ArrowDown' || e.key === 'ArrowUp'
             || e.key === 'ArrowLeft' || e.key === 'ArrowRight' 
-            || e.key === 'Enter') {
+            || e.key === 'Enter' || e.key === ' ' || e.key === 'p' || e.key === 'Escape') {
                 this.keys.splice(this.keys.indexOf(e.key), 1);
             }
         });
