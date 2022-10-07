@@ -56,6 +56,21 @@ export class pausedGame extends gameState {
     handleInput(input){
         if(input.includes('Escape')){
             this.game.setGameState(states.inGame);
+        } else if(input.includes('ArrowUp')){
+            if(this.game.UI.inputTimer > this.game.UI.inputInterval){
+                this.game.UI.selected = Math.max(0, --this.game.UI.selected);
+                this.game.UI.inputTimer = 0;
+            }
+        } else if(input.includes('ArrowDown')){
+            if(this.game.UI.inputTimer > this.game.UI.inputInterval){
+                console.log(this.game.UI.selected);
+                this.game.UI.selected = Math.min(3, ++this.game.UI.selected);
+                this.game.UI.inputTimer = 0;
+            }
         }
+    }
+
+    update(deltaTime){
+        this.game.UI.inputTimer += deltaTime;
     }
 }

@@ -37,7 +37,7 @@ window.addEventListener('load', function(){
             this.time = 20000;
             this.minTime = 0;
             this.gameState = [new startMenu(this), new inGame(this), new pausedGame(this)];
-            this.currentGameState = this.gameState[0];
+            this.currentGameState = this.gameState[2];
             this.player.currentState = this.player.states[0];
             this.player.currentState.enter();
             this.gameOver = false;
@@ -46,6 +46,7 @@ window.addEventListener('load', function(){
             if(this.currentGameState !== this.gameState[0]) this.time -= deltaTime;
             if (this.time < this.minTime) this.gameOver = true;
             this.currentGameState.handleInput(this.input.keys);
+            this.currentGameState.update(deltaTime);
             this.background.update();
             this.player.update(this.input.keys, deltaTime);
             // handle enemies
@@ -79,7 +80,7 @@ window.addEventListener('load', function(){
             this.collisions = this.collisions.filter(collision => !collision.markedForDeletion);
             this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion);
         }
-        draw(context){
+        draw(context, deltaTime){
             this.background.draw(context);
             if(this.currentGameState === this.gameState[1]){
                 this.player.draw(context);
@@ -97,7 +98,7 @@ window.addEventListener('load', function(){
                     message.draw(context);
                 });
             }
-            this.UI.draw(context);
+            this.UI.draw(context, deltaTime);
         }
         addEnemy(){
             if(this.speed > 0 && Math.random() < 0.5) this.enemies.push(new GroundEnemy(this));
@@ -118,7 +119,7 @@ window.addEventListener('load', function(){
         lastTime = timeStamp;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         game.update(deltaTime);
-        game.draw(ctx);
+        game.draw(ctx, deltaTime);
         if(!game.gameOver) requestAnimationFrame(animate);
     }
     animate(0);
