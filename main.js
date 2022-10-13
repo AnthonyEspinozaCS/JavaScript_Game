@@ -37,7 +37,7 @@ window.addEventListener('load', function(){
             this.time = 20000;
             this.minTime = 0;
             this.gameState = [new startMenu(this), new inGame(this), new pausedGame(this)];
-            this.currentGameState = this.gameState[2];
+            this.currentGameState = this.gameState[0];
             this.player.currentState = this.player.states[0];
             this.player.currentState.enter();
             this.gameOver = false;

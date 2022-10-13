@@ -26,6 +26,10 @@ export class startMenu extends gameState {
             this.game.setGameState(states.inGame);
         }
     }
+
+    update(deltaTime){
+        this.game.UI.inputTimer += deltaTime;
+    }
 }
 
 export class inGame extends gameState {
@@ -40,6 +44,10 @@ export class inGame extends gameState {
         if(input.includes('p')){
             this.game.setGameState(states.pausedGame);
         }
+    }
+
+    update(deltaTime){
+        this.game.UI.inputTimer += deltaTime;
     }
 }
 
@@ -67,6 +75,27 @@ export class pausedGame extends gameState {
                 this.game.UI.selected = Math.min(3, ++this.game.UI.selected);
                 this.game.UI.inputTimer = 0;
             }
+        } else if(input.includes('Enter')) {
+            
+        }
+    }
+
+    update(deltaTime){
+        this.game.UI.inputTimer += deltaTime;
+    }
+}
+
+export class inventory extends gameState {
+    constructor(game){
+        super('INVENTORY', game);
+    }
+    enter(){
+        console.log('inventory');
+    }
+
+    handleInput(input){
+        if(input.includes('Escape')){
+            this.game.setGameState(states.pausedGame);
         }
     }
 
