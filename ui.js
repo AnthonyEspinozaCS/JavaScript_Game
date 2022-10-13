@@ -78,7 +78,15 @@ export class UI {
             }
             context.fillText(this.options[i], this.game.width * 0.5, this.game.height * ((i + 2) * 0.1));
         }
+        if(this.game.input.keys.includes('Space') && this.selected === 0){
+            this.drawInventory(context);
+        }
         
+        context.restore();
+    }
+    drawInventory(context){
+        context.save();
+        context.strokeRect(context.width/3, context.height/3, 300, 400);
         context.restore();
     }
 }

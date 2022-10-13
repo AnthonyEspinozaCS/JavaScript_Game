@@ -48,7 +48,7 @@ window.addEventListener('load', function(){
             this.currentGameState.handleInput(this.input.keys);
             this.currentGameState.update(deltaTime);
             this.background.update();
-            this.player.update(this.input.keys, deltaTime);
+            if(this.currentGameState === this.gameState[1]) this.player.update(this.input.keys, deltaTime);
             // handle enemies
             if(this.enemyTimer > this.enemyInterval){
                 this.addEnemy();
