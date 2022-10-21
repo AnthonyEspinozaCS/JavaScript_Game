@@ -1,6 +1,6 @@
 import { Background } from './background.js';
 import { ClimbingEnemy, FlyingEnemy, GroundEnemy } from './enemies.js';
-import { inGame, pausedGame, startMenu } from './gameStates.js';
+import { inGame, inventory, pausedGame, startMenu } from './gameStates.js';
 import { InputHandler } from './input.js';
 import { Player } from './player.js'
 import { UI } from './ui.js'
@@ -36,14 +36,14 @@ window.addEventListener('load', function(){
             this.fontColor = 'white';
             this.time = 20000;
             this.minTime = 0;
-            this.gameState = [new startMenu(this), new inGame(this), new pausedGame(this)];
-            this.currentGameState = this.gameState[0];
+            this.gameState = [new startMenu(this), new inGame(this), new pausedGame(this), new inventory(this)];
+            this.currentGameState = this.gameState[3];
             this.player.currentState = this.player.states[0];
             this.player.currentState.enter();
             this.gameOver = false;
             }
         update(deltaTime){
-            if(this.currentGameState !== this.gameState[0]) this.time -= deltaTime;
+            if(this.currentGameState === this.gameState[1]) this.time -= deltaTime;
             if (this.time < this.minTime) this.gameOver = true;
             this.currentGameState.handleInput(this.input.keys);
             this.currentGameState.update(deltaTime);

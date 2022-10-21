@@ -2,7 +2,8 @@ const states = {
     startMenu: 0,
     inGame: 1,
     pausedGame: 2,
-    gameOver: 3,
+    inventory: 3,
+    gameOver: 4,
 }
 
 class gameState {
@@ -76,7 +77,10 @@ export class pausedGame extends gameState {
                 this.game.UI.inputTimer = 0;
             }
         } else if(input.includes('Enter')) {
-            
+            switch(this.game.UI.selected){
+                case 0:
+                    this.game.setGameState(states.inventory);
+            }
         }
     }
 

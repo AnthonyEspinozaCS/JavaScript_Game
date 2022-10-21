@@ -1,3 +1,7 @@
+const items = [
+    {image: fire}
+]
+
 export class UI {
     constructor(game){
         this.game = game;
@@ -8,12 +12,15 @@ export class UI {
         this.selected = 0;
         this.inputTimer = 1000;
         this.inputInterval = 500;
+        this.inventory = scrolls;
     }
     draw(context){
         context.save();
         if(this.game.currentGameState === this.game.gameState[2]){
             this.drawUI(context);
-        }else{
+        } else if(this.game.currentGameState === this.game.gameState[3]) {
+            this.drawInventory(context);
+        } else {
             context.shadowOffsetX = 2;
             context.shadowOffsetY = 2;
             context.shadowColor = 'black';
@@ -78,15 +85,18 @@ export class UI {
             }
             context.fillText(this.options[i], this.game.width * 0.5, this.game.height * ((i + 2) * 0.1));
         }
-        if(this.game.input.keys.includes('Space') && this.selected === 0){
-            this.drawInventory(context);
-        }
         
         context.restore();
     }
     drawInventory(context){
         context.save();
-        context.strokeRect(context.width/3, context.height/3, 300, 400);
+        context.drawImage(this.inventory, this.game.width * 0.111 , this.game.height * 0.0, this.game.width * .8, this.game.height);
+        context.strokeStyle = 'black';
+        for(let i = 0; i < 3; i++){
+            let x = (0.38)
+            context.strokeRect(this.game.width * 0.38, this.game.height * 0.3, 100, 90);
+            context.drawImage(items[0].image, this.game.width * 0.38, this.game.height * 0.3);
+        }
         context.restore();
     }
 }
