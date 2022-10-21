@@ -1,5 +1,8 @@
 const items = [
-    {image: fire}
+    {image: fire},
+    {image: lightning},
+    {image: water},
+    {image: light},
 ]
 
 export class UI {
@@ -92,10 +95,10 @@ export class UI {
         context.save();
         context.drawImage(this.inventory, this.game.width * 0.111 , this.game.height * 0.0, this.game.width * .8, this.game.height);
         context.strokeStyle = 'black';
-        for(let i = 0; i < 3; i++){
-            let x = (0.38)
-            context.strokeRect(this.game.width * 0.38, this.game.height * 0.3, 100, 90);
-            context.drawImage(items[0].image, this.game.width * 0.38, this.game.height * 0.3);
+        for(let i = 0; i < 4; i++){
+            let row = i > 1 ? 1 : 0;
+            context.strokeRect(this.game.width * 0.38 + ((i * 150) % 300), this.game.height * 0.3 + (row * 125), 100, 90);
+            if(this.game.player.unlocked[i]) context.drawImage(items[i].image, this.game.width * 0.38 + ((i * 150) % 300), this.game.height * 0.3 + (row * 125), 100, 90);
         }
         context.restore();
     }

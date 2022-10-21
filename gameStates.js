@@ -64,7 +64,9 @@ export class pausedGame extends gameState {
 
     handleInput(input){
         if(input.includes('Escape')){
-            this.game.setGameState(states.inGame);
+            if(this.game.UI.inputTimer > this.game.UI.inputInterval){
+                this.game.setGameState(states.inGame);
+            }
         } else if(input.includes('ArrowUp')){
             if(this.game.UI.inputTimer > this.game.UI.inputInterval){
                 this.game.UI.selected = Math.max(0, --this.game.UI.selected);
@@ -99,7 +101,10 @@ export class inventory extends gameState {
 
     handleInput(input){
         if(input.includes('Escape')){
-            this.game.setGameState(states.pausedGame);
+            if(this.game.UI.inputTimer > this.game.UI.inputInterval){
+                this.game.setGameState(states.pausedGame);
+                this.game.UI.inputTimer = 0;
+            }
         }
     }
 

@@ -23,6 +23,7 @@ export class Player {
         this.states = [new Sitting(this.game), new Running(this.game),
         new Jumping(this.game), new Falling(this.game), new Rolling(this.game), new Diving(this.game), new Hit(this.game)];
         this.currentState = null;
+        this.unlocked = [true, false, false, false];
     }
     update(input, deltaTime){
         this.checkCollision(deltaTime);

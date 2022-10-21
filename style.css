@@ -29,6 +29,7 @@
 }
 
 #player1, #layer1, #layer2, #layer3, #layer4, #layer5, #enemy_ghost,
-#enemy_digger, #enemy_spinner, #fire, #collision, #lives, #scrolls {
+#enemy_digger, #enemy_spinner, #fire, #collision, #lives, #scrolls,
+#lightning, #water, #light {
     display: none;
 }
